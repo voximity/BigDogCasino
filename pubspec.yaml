@@ -1,0 +1,27 @@
+name: big_dog
+description: big
+version: 0.0.1
+#homepage: https://www.example.com
+#author: menofcrest <email@example.com>
+
+environment:
+  sdk: '>=1.20.1 <2.0.0'
+
+dependencies:
+  dbldart: ^0.1.4
+  erebus:
+    git: https://gitlab.com/aemino/erebus.git
+  yaml: ^2.1.13
+  mongo_dart: ^0.3.1
+  
+  
+dependency_overrides:
+  mongo_dart:
+    git:
+      url: https://github.com/aemino/mongo_dart.git
+      ref: dart2_compat
+  mongo_dart_query:
+    git:
+      url: https://github.com/aemino/mongo_dart_query.git
+      ref: dart2_compat
+  

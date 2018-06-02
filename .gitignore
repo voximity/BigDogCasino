@@ -4,6 +4,7 @@
 .pub/
 build/
 config.yaml/
+**/logs config.yaml
 # Remove the following pattern if you wish to check in your lock file
 pubspec.lock
 

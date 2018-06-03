@@ -12,12 +12,12 @@ class UserAccount {
 
   UserAccount(this.service, this.id, this.document);
 
-  Future<UserAccount> update(UserSnowflake id, Map<String, dynamic> data) =>
+  Future<UserAccount> update(Map<String, dynamic> data) =>
       service.updateAccount(id, data);
 }
 
 class UserService extends Service {
-  final name = 'users'; 
+  final name = 'users';
   final Db db = Db('mongodb://localhost:27017/casino');
   DbCollection get users => db.collection('users');
 
@@ -25,19 +25,18 @@ class UserService extends Service {
     await db.open();
   }
 
-   Future<UserAccount> getAccount(UserSnowflake id) async {
+  Future<UserAccount> getAccount(UserSnowflake id) async {
     var user = await users.findOne({'_id': id.toString()});
-
-    Future<Map<String, dynamic>> updateAccount(UserSnowflake id, Map<String, dynamic> data) => users.update({'_id': id.toString()}, data);
 
     if (user == null) {
       user = await users.insert({'_id': id.toString(), 'balance': 0});
     }
 
-   return UserAccount(this, id, user);
-}
-  
-Future<UserAccount> updateAccount(UserSnowflake id, Map<String, dynamic> data) async {
+    return UserAccount(this, id, user);
+  }
+
+  Future<UserAccount> updateAccount(
+      UserSnowflake id, Map<String, dynamic> data) async {
     final user = await users.update({'_id': id.toString()}, data);
     return UserAccount(this, id, user);
   }

@@ -15,24 +15,18 @@ class FlipCommand extends Command {
 
   Future<void> execute(context, args) async {
     final bet = await args['bet'].resolve(Resolver.integer());
-    userService.getAccount(context.message.author.id);
-    final account = userService.getAccount(context.message.author.id);
+    final account = await userService.getAccount(context.message.author.id);
 
     if (random == true) {
-      
-          await context
-        .respond(
-            (message) => message..content = 'you won 🐶${bet * 2}')
-        .send();
+      await account.update({'balance': account.balance + bet *2});
+      await context
+          .respond((message) => message..content = 'you won 🐶${bet * 2}')
+          .send();
+    } else {
+      await account.update({'balance': account.balance - bet});
+      await context
+          .respond((message) => message..content = 'you lost 🐶$bet')
+          .send();
     }
-    else {
-                await context
-        .respond(
-            (message) => message..content = 'you lost 🐶$bet')
-        .send();
-    }
-
-
-
   }
 }

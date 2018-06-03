@@ -6,7 +6,7 @@ class BalanceCommand extends Command {
 
   final args = [];
 
-  final UserService userService;
+  final UserService userService;    
 
   BalanceCommand(this.userService);
 

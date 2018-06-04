@@ -9,24 +9,16 @@ class FlipCommand extends Command {
 
   final UserService userService;
 
-  final random = new Random().nextBool();
+  final random = Random();
 
-  FlipCommand();
+  FlipCommand(this.userService);
+
 
   Future<void> execute(context, args) async {
     final bet = await args['bet'].resolve(Resolver.integer());
     final account = await userService.getAccount(context.message.author.id);
-
-    if (random == true) {
-      await account.update({'balance': account.balance + bet *2});
-      await context
-          .respond((message) => message..content = 'you won 🐶${bet * 2}')
-          .send();
-    } else {
-      await account.update({'balance': account.balance - bet});
-      await context
-          .respond((message) => message..content = 'you lost 🐶$bet')
-          .send();
-    }
+    final reward = random.nextBool() ? (bet * 2) : (bet * -1);
+    await account.update({'balance' : account.balance + reward});
+    context.respond((message) => message..content = 'you ${reward >= 0 ? 'won' : 'lost'} ${(reward.abs())}');
   }
 }

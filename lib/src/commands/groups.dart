@@ -2,6 +2,7 @@ import 'package:erebus/erebus.dart';
 import 'package:erebus/command.dart';
 import '../../casino.dart';
 import 'account/balance.dart';
+import 'gambling/flip.dart';
 import 'misc/dog.dart';
 import 'misc/id.dart';
 import 'misc/invite.dart';
@@ -20,9 +21,11 @@ class AccountCommandGroup extends CommandGroup {
 class GamblingCommandGroup extends CommandGroup {
   final name = 'gambling';
 
-  List<Command> get commands => [];
+  List<Command> get commands => [FlipCommand(userService)];
+  
+  final UserService userService;
 
-  GamblingCommandGroup();
+  GamblingCommandGroup(this.userService);
 }
 
 class MiscCommandGroup extends CommandGroup {

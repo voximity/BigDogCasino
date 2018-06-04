@@ -20,7 +20,7 @@ Future<void> main() async {
   client.services.register(userService);
   client.commands.registerGroup(AccountCommandGroup(userService));
   client.commands.registerGroup(MiscCommandGroup());
-  client.commands.registerGroup(GamblingCommandGroup());
+  client.commands.registerGroup(GamblingCommandGroup(userService));
 
   await client.connect();
 }

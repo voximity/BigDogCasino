@@ -8,6 +8,8 @@ environment:
   sdk: '>=1.20.1 <2.0.0'
 
 dependencies:
+  dbldart:
+    git: https://github.com/voximity/dbldart.git
   erebus:
     git: https://gitlab.com/aemino/erebus.git
   yaml: ^2.1.13

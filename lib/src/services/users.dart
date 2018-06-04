@@ -25,6 +25,10 @@ class UserService extends Service {
     await db.open();
   }
 
+  Future<UserAccount> getDaily() async {
+    
+  }
+
   Future<UserAccount> getAccount(UserSnowflake id) async {
     var user = await users.findOne({'_id': id.toString()});
 

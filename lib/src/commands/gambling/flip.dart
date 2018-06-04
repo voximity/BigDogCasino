@@ -20,7 +20,7 @@ class FlipCommand extends Command {
     await account.update({'balance': account.balance + reward});
     await context
         .respond((message) => message
-          ..content = 'you ${reward >= 0 ? 'won' : 'lost'} ${(reward.abs())}')
+          ..content = 'you ${reward >= 0 ? 'Won' : 'lost'} ${(reward.abs())}')
         .send();
   }
 }

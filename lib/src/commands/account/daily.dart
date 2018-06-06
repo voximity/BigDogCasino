@@ -8,14 +8,14 @@ class DailyCommand extends Command {
 
   final UserService userService;
 
-  DailyCommand();
+  DailyCommand(this.userService);
 
   Future<void> execute(context, args) async {
   final account = await userService.getAccount(context.message.author.id);
-  final dailyMessage =
-    await context
-        .respond((message) => message..content = 'You recieved your daily 🐶!')
-        .send();
-        account.update({'balance': account.balance + 50}); 
+  final thisDaily = new DateTime.now();
+  final nextDaily = thisDaily.add(new Duration(hours: 23));
+  Duration difference = thisDaily.difference(nextDaily);
+  
+
   }
 }

@@ -25,8 +25,12 @@ class UserService extends Service {
     await db.open();
   }
 
-  Future<UserAccount> getDaily() async {
-    
+  Future<UserAccount> getDaily(DateTime id) async {
+      var user = await users.findOne({'_id': id.toString()});
+      
+      if (user == null) {
+        user = await users.insert({'_id': id.toString(), 'last_daily': DateTime});
+    }
   }
 
   Future<UserAccount> getAccount(UserSnowflake id) async {

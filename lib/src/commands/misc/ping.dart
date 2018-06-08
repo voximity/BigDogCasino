@@ -9,13 +9,13 @@ class PingCommand extends Command {
 
   Future<void> execute(context, args) async {
     final message = context.message;
-    final pingMessage = await context
+    final stopwatch = Stopwatch();
+    stopwatch.start();
+    await context
         .respond((message) => message..content = 'Dog!')
         .send()
         .then((snowflake) => message);
-
-    final pingTime = pingMessage.sentAt.difference(message.sentAt).inMilliseconds;
-
+    final pingTime = stopwatch.elapsedMilliseconds;
     await context
         .respond((message) => message..content = 'Dog! `$pingTime ms`')
         .send();
